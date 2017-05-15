@@ -64,17 +64,13 @@ class LogbookController extends Controller
             $data = $form->getData();
             $data->setCallsign($callsign);
 
-            // Convert the datestrings to objects
-            $data->setLogStart(new \DateTime($data->getLogStart()));
-            $data->setLogEnd(new \DateTime($data->getLogEnd()));
-
             // Assign the user
             $data->setUser($this->getUser());
 
             $em->persist($data);
             $em->flush();
 
-            $this->get('session')->getFlashBag()->add('success', 'Entry succesfully added, you can immediately add another one below.');
+            $this->get('session')->getFlashBag()->add('success', 'Entry succesfully edited!');
 
             return $this->redirectToRoute('qso_logbook_edit', array(
                 'id' => $data->getId()
@@ -123,10 +119,6 @@ class LogbookController extends Controller
             /** @var Logbook $data */
             $data = $form->getData();
             $data->setCallsign($callsign);
-
-            // Convert the datestrings to objects
-            $data->setLogStart(new \DateTime($data->getLogStart()));
-            $data->setLogEnd(new \DateTime($data->getLogEnd()));
 
             // Assign the user
             $data->setUser($this->getUser());
@@ -198,7 +190,6 @@ class LogbookController extends Controller
             $row['actions'] = $this->render('QSOBundle:logbook/table:actions.html.twig', array(
                 'id' => $row['id']
             ))->getContent();
-            dump($row['actions']);
 
             unset($row['id'], $row['frequency'], $row['unit'], $row['logEnd'], $row['logStart']);
             $tmp[] = array_values($row);
