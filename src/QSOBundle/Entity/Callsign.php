@@ -60,7 +60,7 @@ class Callsign
      */
     public function setCallsign($callsign)
     {
-        $this->callsign = $callsign;
+        $this->callsign = strtoupper($callsign);
 
         return $this;
     }

@@ -60,11 +60,10 @@ class LogbookController extends Controller
             $em->persist($data);
             $em->flush();
 
-            return $this->redirectToRoute('qso_logbook_view', array(
-                'id' => $data->getId()
-            ));
-        }
+            $this->get('session')->getFlashBag()->add('success', 'Entry succesfully added, you can immediately add another one below.');
 
+            return $this->redirectToRoute('qso_logbook_add');
+        }
 
         return $this->render('QSOBundle:logbook:add.html.twig', array(
             'form' => $form->createView()

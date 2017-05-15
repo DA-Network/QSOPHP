@@ -3,6 +3,7 @@
 namespace QSOBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -26,6 +27,13 @@ class UserType extends AbstractType
             ))
             ->add('email', null, array(
                 'label' => 'E-mail Address'
+            ))
+            ->add('noCallsign', CheckboxType::class, array(
+                'mapped' => false,
+                'label' => 'I don\'t have a Callsign',
+                'attr' => array(
+                    'class' => 'no-callsign-check'
+                )
             ))
             ->add('callsignName', TextType::class, array(
                 'label' => 'Call Sign'
