@@ -127,10 +127,10 @@
         </div>
         <div class="row">
             <div class="col s12">
-            <p>
-            <input type="checkbox" class="filled-in" id="noCallsign" />
-            <label for='noCallsign'>I Don't Have A Callsign</label>
-            </p>
+                <p>
+                    {{ form_widget(form.noCallsign) }}
+                    {{ form_label(form.noCallsign) }}
+                </p>
             </div>
         </div>
         <div class="row">
@@ -183,17 +183,17 @@
 
 </body>
 <script>
-    $.noConflict();
-    jQuery(document).ready(function($){
-        $("#noCallsign").click(function(){
-                var noCallsign = $("#noCallsign").is(":checked");
-                if (noCallsign){
-                    $("#qsobundle_user_callsignName").attr("value", "demo") ;
-                    $("#qsobundle_user_callsignName").attr("readonly", true) ;
-                } else {
-                    $("#qsobundle_user_callsignName").attr("value", "") ;
-                    $("#qsobundle_user_callsignName").attr("readonly", false) ;
-                }
+    $(function() {
+        $('.no-callsign-check').on('click', function() {
+            var target = $("#qsobundle_user_callsignName");
+            target.focus();
+            if ($(this).is(":checked")) {
+                target.attr("value", "demo");
+                target.attr("readonly", true);
+            } else {
+                target.attr("value", "");
+                target.attr("readonly", false);
+            }
         });
     })
 </script>
