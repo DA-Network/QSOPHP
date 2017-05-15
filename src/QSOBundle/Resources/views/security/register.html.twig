@@ -8,7 +8,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/materialize.min.css') }}" />
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css') }}" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 
     <link rel="apple-touch-icon" sizes="57x57" href="{{ asset('apple-icon-57x57.png') }}">
     <link rel="apple-touch-icon" sizes="60x60" href="{{ asset('apple-icon-60x60.png') }}">
@@ -80,7 +80,7 @@
 </head>
 <body>
 <div class="center-container">
-    <div class="push-100"></div>
+    <div class="push-50"></div>
     <div class="loader center-align">
         <img class="logo" src="{{ asset('assets/img/logo-white.png') }}" alt="Logo" />
     </div>
@@ -88,7 +88,8 @@
 <div class="container">
     {{ form_start(form) }}
         <div class="row center-align">
-            <h1>QSO Logger</h1>
+            <h4>DA's QSOLogbook</h4>
+            <h6>Register below. All fields are required.</h6>
         </div>
 
         {% if errors|length > 0 %}
@@ -124,13 +125,21 @@
                 {{ form_label(form.email) }}
             </div>
         </div>
-
+        <div class="row">
+            <div class="col s12">
+            <p>
+            <input type="checkbox" class="filled-in" id="noCallsign" />
+            <label for='noCallsign'>I Don't Have A Callsign</label>
+            </p>
+            </div>
+        </div>
         <div class="row">
             <div class="input-field col s12">
                 {{ form_widget(form.callsignName) }}
                 {{ form_label(form.callsignName) }}
             </div>
         </div>
+        
 
         <div class="row">
             <div class="input-field col s12">
@@ -161,13 +170,31 @@
                 <button type="submit" class="btn green accent-4" style="width: 100%">Register</button>
             </div>
             <div class="col s12 center-align">
-                <div class="push-40"></div>
-                <a href="{{ url('qso_login') }}">Or login instead</a>
+                <br />
+                <button class="btn black accent-4 fullWidth"><a href="{{ url('qso_login') }}">Log In Instead</a></button>
+                <div class="push-100"></div>
             </div>
+            
         </div>
     {{ form_end(form) }}
 </div>
 <script type="text/javascript" src="{{ asset('assets/js/jquery-3.2.1.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/js/materialize.min.js') }}"></script>
+
 </body>
+<script>
+    $.noConflict();
+    jQuery(document).ready(function($){
+        $("#noCallsign").click(function(){
+                var noCallsign = $("#noCallsign").is(":checked");
+                if (noCallsign){
+                    $("#qsobundle_user_callsignName").attr("value", "demo") ;
+                    $("#qsobundle_user_callsignName").attr("readonly", true) ;
+                } else {
+                    $("#qsobundle_user_callsignName").attr("value", "") ;
+                    $("#qsobundle_user_callsignName").attr("readonly", false) ;
+                }
+        });
+    })
+</script>
 </html>

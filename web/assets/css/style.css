@@ -25,7 +25,7 @@ ul.input-list li a {
 }
 .modal-header {
     border-radius: 0 0 2px 2px;
-//background-color: #fafafa;
+    background-color: #fafafa;
     padding: 4px 24px;
     height: 56px;
     width: 100%;
@@ -114,4 +114,37 @@ body .progress {
 
 body .progress .indeterminate {
     background-color: #0D47A1;
+}
+
+
+/* 
+    Begin Alec Changes
+*/
+
+.push-50 {
+    margin-top: 50px;
+}
+
+html, body {
+    font-family: 'Open-Sans', sans-serif !important;
+    background-color: #efefef;
+    -webkit-font-smoothing: antialiased;
+    font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+}
+
+html h4 {
+        font-weight: 200 !important;
+}
+.fullWidth {
+    width: 100%;
+}
+.row {
+    margin-bottom: 0px !important;
+}
+#datatable_wrapper a#datatable_previous {
+        float:left; 
+}
+#datatable_wrapper a#datatable_next {
+        float:right ; 
 }

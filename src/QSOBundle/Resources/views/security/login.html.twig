@@ -8,7 +8,8 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/materialize.min.css') }}" />
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css') }}" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+    <!-- <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'> -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 
     <link rel="apple-touch-icon" sizes="57x57" href="{{ asset('apple-icon-57x57.png') }}">
     <link rel="apple-touch-icon" sizes="60x60" href="{{ asset('apple-icon-60x60.png') }}">
@@ -80,14 +81,15 @@
 </head>
 <body>
 <div class="center-container">
-    <div class="push-100"></div>
+    <div class="push-50"></div>
     <div class="loader center-align">
         <img class="logo" src="{{ asset('assets/img/logo-white.png') }}" alt="Logo" />
     </div>
 </div>
 <div class="container">
     <div class="row center-align">
-        <h1>QSO Logger</h1>
+        <h4>DA's QSOLogbook</h4>
+        <h6>Log In</h6>
     </div>
 
     <form action="{{ path('qso_login') }}" method="post">
@@ -111,11 +113,10 @@
                 <label for="username">E-mail</label>
             </div>
         </div>
-
         <div class="row">
             <div class="input-field col s12">
                 <input type="password" class="{% if error %}invalid{% endif %}" id="password" name="_password" />
-                <label for="password">password</label>
+                <label for="password">Password</label>
             </div>
         </div>
 
@@ -124,8 +125,10 @@
                 <button type="submit" class="btn green accent-4" style="width: 100%">Login</button>
             </div>
             <div class="col s12 center-align">
-                <div class="push-40"></div>
-                <a href="{{ url('qso_register') }}">Or create an account instead</a>
+            <br />
+
+                <button class="btn black accent-4 fullWidth"><a  href="{{ url('qso_register') }}">Create an Account</a></button>
+                <div class="push-100"></div>     
             </div>
         </div>
     </form>
