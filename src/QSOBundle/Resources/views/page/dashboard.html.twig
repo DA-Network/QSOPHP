@@ -2,12 +2,22 @@
 
 {% set title = 'Dashboard' %}
 {% block content %}
-
     <div class="row">
+        <div class="col s12">
+            <div class="card red darken-4">
+                <div class="card-content white-text">
+                    <span class="card-title">Announcements</span>
+                    <p>
+                        Thank you for trying out our app. Please bear in mind this is a beta release, and we are working towards
+                        updating this app with exciting new features like QRZ and LOTW integration. Stay tuned!
+                    </p>
+                </div>
+            </div>
+        </div>
         <div class="col s12">
             <div class="card light-blue darken-2">
                 <div class="card-content white-text">
-                    <span class="card-title">Welcome {{ app.user.firstname }}</span>
+                    <span class="card-title">Hey  {{ app.user.firstname }}</span>
                     <p>Are you ready to log today?</p><br />
                     {% if total_logbooks == 0 %}
                         <a class="btn blue darken-3" href="{{ url('qso_logbook_add') }}">Start logging</a>
@@ -19,5 +29,4 @@
             </div>
         </div>
     </div>
-
-{% endblock %}w
+{% endblock %}
