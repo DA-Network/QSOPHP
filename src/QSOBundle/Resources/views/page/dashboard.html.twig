@@ -2,4 +2,22 @@
 
 {% set title = 'Dashboard' %}
 {% block content %}
-{% endblock %}
+
+    <div class="row">
+        <div class="col s12">
+            <div class="card light-blue darken-2">
+                <div class="card-content white-text">
+                    <span class="card-title">Welcome {{ app.user.firstname }}</span>
+                    <p>Are you ready to log today?</p><br />
+                    {% if total_logbooks == 0 %}
+                        <a class="btn blue darken-3" href="{{ url('qso_logbook_add') }}">Start logging</a>
+                    {% else %}
+                        <p>You already have {{ total_logbooks }} log's! Want to add another one?</p><br />
+                        <a class="btn blue darken-3" href="{{ url('qso_logbook_add') }}">+ Add log</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}w

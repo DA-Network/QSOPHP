@@ -11,9 +11,22 @@ use Symfony\Component\HttpFoundation\Request;
 
 class PageController extends Controller
 {
+    /**
+     * Show the user's personal dashboard
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function dashboardAction()
     {
-        return $this->render('QSOBundle:page:dashboard.html.twig');
+        $result = $this->getDoctrine()
+            ->getManager()
+            ->createQuery('SELECT COUNT(l.id) AS total FROM QSOBundle:Logbook l WHERE l.user = :user')
+            ->setParameter('user', $this->getUser())
+            ->getSingleResult();
+
+        return $this->render('QSOBundle:page:dashboard.html.twig', array(
+            'total_logbooks' => $result['total']
+        ));
     }
 
     public function indexAction()
