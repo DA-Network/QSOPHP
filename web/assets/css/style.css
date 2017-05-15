@@ -116,8 +116,7 @@ body .progress .indeterminate {
     background-color: #0D47A1;
 }
 
-
-/* 
+/*
     Begin Alec Changes
 */
 
@@ -134,7 +133,7 @@ html, body {
 }
 
 html h4 {
-        font-weight: 200 !important;
+    font-weight: 200 !important;
 }
 .fullWidth {
     width: 100%;
@@ -143,8 +142,8 @@ html h4 {
     margin-bottom: 0px !important;
 }
 #datatable_wrapper a#datatable_previous {
-        float:left; 
+    float:left;
 }
 #datatable_wrapper a#datatable_next {
-        float:right ; 
+    float:right ;
 } 
