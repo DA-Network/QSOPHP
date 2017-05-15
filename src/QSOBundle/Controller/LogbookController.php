@@ -13,6 +13,80 @@ use Symfony\Component\HttpFoundation\Request;
 class LogbookController extends Controller
 {
     /**
+     * Allows us to edit the log entry
+     *
+     * @param Request $request
+     * @param $id
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
+    public function editAction(Request $request, $id)
+    {
+        $entry = $this->getDoctrine()
+            ->getManager()
+            ->getRepository('QSOBundle:Logbook')->findOneBy(array(
+                'id' => $id,
+                'user' => $this->getUser()
+            ));
+
+        if (empty($entry))
+        {
+            return $this->redirectToRoute('qso_dashboard');
+        }
+
+        $form = $this->createForm(LogbookType::class, $entry);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid())
+        {
+            $em = $this->getDoctrine()->getManager();
+
+            $arrayData = $request->request->get($form->getName());
+
+            // Create the callsign if the autocomplete could not find it
+            if (!empty($arrayData['callsignAutocomplete']))
+            {
+                $callsign = $em->getRepository('QSOBundle:Callsign')->findOneBy(array(
+                    'callsign' => $arrayData['callsignAutocomplete']
+                ));
+
+                if (empty($callsign))
+                {
+                    $callsign = new Callsign();
+                    $callsign->setCallsign($arrayData['callsignAutocomplete']);
+                    $callsign->setIsActive(true);
+
+                    $em->persist($callsign);
+                    $em->flush();
+                }
+            }
+
+            /** @var Logbook $data */
+            $data = $form->getData();
+            $data->setCallsign($callsign);
+
+            // Convert the datestrings to objects
+            $data->setLogStart(new \DateTime($data->getLogStart()));
+            $data->setLogEnd(new \DateTime($data->getLogEnd()));
+
+            // Assign the user
+            $data->setUser($this->getUser());
+
+            $em->persist($data);
+            $em->flush();
+
+            $this->get('session')->getFlashBag()->add('success', 'Entry succesfully added, you can immediately add another one below.');
+
+            return $this->redirectToRoute('qso_logbook_edit', array(
+                'id' => $data->getId()
+            ));
+        }
+
+        return $this->render('QSOBundle:logbook:form.html.twig', array(
+            'form' => $form->createView()
+        ));
+    }
+
+    /**
      * Show the add logbook page
      *
      * @return \Symfony\Component\HttpFoundation\Response
@@ -65,7 +139,7 @@ class LogbookController extends Controller
             return $this->redirectToRoute('qso_logbook_add');
         }
 
-        return $this->render('QSOBundle:logbook:add.html.twig', array(
+        return $this->render('QSOBundle:logbook:form.html.twig', array(
             'form' => $form->createView()
         ));
     }
@@ -118,8 +192,15 @@ class LogbookController extends Controller
         $tmp = array();
         foreach ($data as $row) {
             $diff = $row['logStart']->diff($row['logEnd']);
-            unset($row['frequency'], $row['unit'], $row['logEnd'], $row['logStart']);
+
             $row['totalTime'] = $diff->format('%H:%I:%S');
+
+            $row['actions'] = $this->render('QSOBundle:logbook/table:actions.html.twig', array(
+                'id' => $row['id']
+            ))->getContent();
+            dump($row['actions']);
+
+            unset($row['id'], $row['frequency'], $row['unit'], $row['logEnd'], $row['logStart']);
             $tmp[] = array_values($row);
         }
 

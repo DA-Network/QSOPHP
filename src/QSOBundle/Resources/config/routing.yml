@@ -30,6 +30,10 @@ qso_logbook_view:
     path: /qso/logbook/{id}
     defaults: { _controller: QSOBundle:Logbook:view }
 
+qso_logbook_edit:
+    path: /qso/logbook/{id}/edit
+    defaults: { _controller:QSOBundle:Logbook:edit }
+
 qso_logbook_delete:
     path: /qso/logbook/{id}/delete
     defaults: { _controller:QSOBundle:Logbook:delete }

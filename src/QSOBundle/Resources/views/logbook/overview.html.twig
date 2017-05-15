@@ -13,13 +13,13 @@
             <table id="datatable" class="mdl-data-table" cellspacing="0" width="100%">
                 <thead>
                 <tr>
-                    <th>ID</th>
                     <th>Callsign</th>
                     {#
                     <th>Frequency</th>
                     <th>Frequency Unit</th>
                     #}
                     <th>Total time</th>
+                    <th>Actions</th>
                 </tr>
                 </thead>
             </table>
@@ -47,14 +47,11 @@
                 'ajax': '{{ url('qso_logbook_datatable') }}'
             });
 
+            {#
             $('#datatable tbody').on('click', 'tr', function() {
-                var id = parseInt($(this).children().first().text());
-
-                if (!isNaN(id))
-                {
-                    goToLogbook($(this).children().first().text());
-                }
+                $(this).children().last().find('a.view-trigger').click();
             });
+            #}
         });
     </script>
 {% endblock %}
