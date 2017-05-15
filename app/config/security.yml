@@ -1,0 +1,43 @@
+# To get started with security, check out the documentation:
+# http://symfony.com/doc/current/security.html
+security:
+
+    encoders:
+        QSOBundle\Entity\User:
+            algorithm: bcrypt
+
+    # http://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
+    providers:
+        database:
+            entity:
+                class: QSOBundle:User
+                property: email
+
+    firewalls:
+        # disables authentication for assets and the profiler, adapt it according to your needs
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+        main:
+            anonymous: ~
+            provider: database
+            logout:
+                path:   /qso/logout
+                target: qso_login
+            form_login:
+                login_path: qso_login
+                check_path: qso_login
+                always_use_default_target_path: true
+                default_target_path: qso_dashboard
+            # activate different ways to authenticate
+
+            # http://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate
+            #http_basic: ~
+
+            # http://symfony.com/doc/current/cookbook/security/form_login_setup.html
+            #form_login: ~
+
+    access_control:
+        - { path: ^/qso/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/qso, roles: ROLE_USER }

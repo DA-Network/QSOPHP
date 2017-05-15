@@ -1,0 +1,60 @@
+{% extends 'QSOBundle::default.html.twig' %}
+
+{% set title = 'Overview' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/material-design-lite/1.1.0/material.min.css" />
+{% endblock %}
+
+{% block content %}
+
+    <div class="container">
+        <div class="row">
+            <table id="datatable" class="mdl-data-table" cellspacing="0" width="100%">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Callsign</th>
+                    {#
+                    <th>Frequency</th>
+                    <th>Frequency Unit</th>
+                    #}
+                    <th>Total time</th>
+                </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript" src="//cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript">
+
+        function goToLogbook(id)
+        {
+            var url = '{{ url('qso_logbook_view', {id: 0}) }}';
+            url = url.substr(0,url.length-1);
+            url+=id;
+            window.location.href = url;
+        }
+
+        $(document).ready(function() {
+            $('#datatable').DataTable({
+                'processing': true,
+                'serverSide': true,
+                'searching': false,
+                'ajax': '{{ url('qso_logbook_datatable') }}'
+            });
+
+            $('#datatable tbody').on('click', 'tr', function() {
+                var id = parseInt($(this).children().first().text());
+
+                if (!isNaN(id))
+                {
+                    goToLogbook($(this).children().first().text());
+                }
+            });
+        });
+    </script>
+{% endblock %}

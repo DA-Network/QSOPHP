@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>QSO Logger</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/vendor/ripjar-material-datetime-picker/material-datetime-picker.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/materialize.min.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css') }}" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+
+    <link rel="apple-touch-icon" sizes="57x57" href="{{ asset('apple-icon-57x57.png') }}">
+    <link rel="apple-touch-icon" sizes="60x60" href="{{ asset('apple-icon-60x60.png') }}">
+    <link rel="apple-touch-icon" sizes="72x72" href="{{ asset('apple-icon-72x72.png') }}">
+    <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('apple-icon-76x76.png') }}">
+    <link rel="apple-touch-icon" sizes="114x114" href="{{ asset('apple-icon-114x114.png') }}">
+    <link rel="apple-touch-icon" sizes="120x120" href="{{ asset('apple-icon-120x120.png') }}">
+    <link rel="apple-touch-icon" sizes="144x144" href="{{ asset('apple-icon-144x144.png') }}">
+    <link rel="apple-touch-icon" sizes="152x152" href="{{ asset('apple-icon-152x152.png') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('apple-icon-180x180.png') }}">
+    <link rel="icon" type="image/png" sizes="192x192"  href="{{ asset('android-icon-192x192.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="96x96" href="{{ asset('favicon-96x96.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon-16x16.png') }}">
+    <link rel="manifest" href="{{ asset('manifest.json') }}">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="{{ asset('ms-icon-144x144.png') }}">
+    <style>
+        body, html {
+            background-color: #0D47A1;
+        }
+
+        div.center-container {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .center-align {
+            margin: 0 auto;
+        }
+
+        .logo {
+            max-width: 50%;
+            clear: both;
+        }
+        .push-100 {
+            width: 100%;
+            height: 100px;
+        }
+        .push-40 {
+            width: 100%;
+            height: 40px;
+        }
+
+        h1 {
+            color: #FFF;
+        }
+
+        body {
+            color: #FFF;
+        }
+
+        /* label color */
+        .input-field label {
+            color: #FFF;
+        }
+        /* label focus color */
+        .input-field input[type=password]:focus + label,
+        .input-field input[type=text]:focus + label {
+            color: #FFF;
+        }
+
+        .input-field input[type=password]:focus,
+        .input-field input[type=text]:focus {
+            border-bottom: 1px solid #FFF;
+            box-shadow: 0 1px 0 0 #EEE;
+        }
+    </style>
+</head>
+<body>
+<div class="center-container">
+    <div class="push-100"></div>
+    <div class="loader center-align">
+        <img class="logo" src="{{ asset('assets/img/logo-white.png') }}" alt="Logo" />
+    </div>
+</div>
+<div class="container">
+    <div class="row center-align">
+        <h1>QSO Logger</h1>
+    </div>
+
+    <form action="{{ path('qso_login') }}" method="post">
+
+        {% if error %}
+            <div class="row">
+                <div class="col s12 m12">
+                    <div class="card red lighten-2">
+                        <div class="card-content white-text center-align" style="width: 100%;">
+                            <span class="card-title">Oops!</span>
+                            <p class="center-align">{{ error.messageKey|trans(error.messageData, 'security') }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+
+        <div class="row">
+            <div class="input-field col s12">
+                <input type="text" id="username" class="{% if error %}invalid{% endif %}" name="_username" value="{{ last_username }}" />
+                <label for="username">E-mail</label>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="input-field col s12">
+                <input type="password" class="{% if error %}invalid{% endif %}" id="password" name="_password" />
+                <label for="password">password</label>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col s12">
+                <button type="submit" class="btn green accent-4" style="width: 100%">Login</button>
+            </div>
+            <div class="col s12 center-align">
+                <div class="push-40"></div>
+                <a href="{{ url('qso_register') }}">Or create an account instead</a>
+            </div>
+        </div>
+    </form>
+
+</div>
+<script type="text/javascript" src="{{ asset('assets/js/jquery-3.2.1.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/js/materialize.min.js') }}"></script>
+</body>
+</html>

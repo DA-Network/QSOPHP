@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>QSO Logger</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/vendor/ripjar-material-datetime-picker/material-datetime-picker.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/materialize.min.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css') }}" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+
+    <link rel="apple-touch-icon" sizes="57x57" href="{{ asset('apple-icon-57x57.png') }}">
+    <link rel="apple-touch-icon" sizes="60x60" href="{{ asset('apple-icon-60x60.png') }}">
+    <link rel="apple-touch-icon" sizes="72x72" href="{{ asset('apple-icon-72x72.png') }}">
+    <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('apple-icon-76x76.png') }}">
+    <link rel="apple-touch-icon" sizes="114x114" href="{{ asset('apple-icon-114x114.png') }}">
+    <link rel="apple-touch-icon" sizes="120x120" href="{{ asset('apple-icon-120x120.png') }}">
+    <link rel="apple-touch-icon" sizes="144x144" href="{{ asset('apple-icon-144x144.png') }}">
+    <link rel="apple-touch-icon" sizes="152x152" href="{{ asset('apple-icon-152x152.png') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('apple-icon-180x180.png') }}">
+    <link rel="icon" type="image/png" sizes="192x192"  href="{{ asset('android-icon-192x192.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="96x96" href="{{ asset('favicon-96x96.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon-16x16.png') }}">
+    <link rel="manifest" href="{{ asset('manifest.json') }}">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="{{ asset('ms-icon-144x144.png') }}">
+    <style>
+        body, html {
+            background-color: #0D47A1;
+        }
+
+        div.center-container {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .center-align {
+            margin: 0 auto;
+        }
+
+        .logo {
+            max-width: 50%;
+            clear: both;
+        }
+        .push-100 {
+            width: 100%;
+            height: 100px;
+        }
+        .push-40 {
+            width: 100%;
+            height: 40px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="center-container">
+    <div class="push-100"></div>
+    <div class="loader center-align">
+        <img class="logo" src="{{ asset('assets/img/logo-white.png') }}" alt="Logo" />
+    </div>
+</div>
+<div class="push-40"></div>
+<div class="center-container">
+    <div class="loader center-align">
+        <div class="preloader-wrapper big active">
+            <div class="spinner-layer spinner-blue-only">
+                <div class="circle-clipper left">
+                    <div class="circle"></div>
+                </div><div class="gap-patch">
+                    <div class="circle"></div>
+                </div><div class="circle-clipper right">
+                    <div class="circle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript" src="{{ asset('assets/js/jquery-3.2.1.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/js/materialize.min.js') }}"></script>
+<script type="text/javascript">
+    $(function() {
+        setTimeout(function() {
+            window.location = '{{ url('qso_dashboard') }}';
+        }, 4000);
+    });
+</script>
+</body>
+</html>

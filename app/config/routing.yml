@@ -1,0 +1,6 @@
+qso:
+    resource: "@QSOBundle/Resources/config/routing.yml"
+    prefix:   /
+
+logout:
+    path: /qso/logout

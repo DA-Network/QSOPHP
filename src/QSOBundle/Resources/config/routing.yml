@@ -1,0 +1,39 @@
+qso_homepage:
+    path:     /
+    defaults: { _controller: QSOBundle:Page:index }
+
+qso_login:
+    path: /qso/login
+    defaults: { _controller: QSOBundle:Security:login }
+
+qso_register:
+    path: /register
+    defaults: { _controller: QSOBundle:Security:register }
+
+qso_dashboard:
+    path:     /qso/dashboard
+    defaults: { _controller: QSOBundle:Page:dashboard }
+
+qso_logbook_add:
+    path: /qso/logbook/add
+    defaults: { _controller: QSOBundle:Logbook:add}
+
+qso_logbook_overview:
+    path: /qso/logbook
+    defaults: { _controller: QSOBundle:Logbook:overview }
+
+qso_logbook_datatable:
+    path: /qso/logbook/datatable
+    defaults: { _controller: QSOBundle:Logbook:datatable }
+
+qso_logbook_view:
+    path: /qso/logbook/{id}
+    defaults: { _controller: QSOBundle:Logbook:view }
+
+qso_logbook_delete:
+    path: /qso/logbook/{id}/delete
+    defaults: { _controller:QSOBundle:Logbook:delete }
+
+qso_callsign_autocomplete:
+    path: /qso/xhr/callsign-autocomplete
+    defaults: { _controller: QSOBundle:Callsign:autocomplete}

@@ -1,0 +1,230 @@
+{% extends 'QSOBundle::default.html.twig' %}
+
+{% set title = '+ Logbook' %}
+{% block content %}
+        <div class="container">
+            {{ form_start(form, {attr: {class: 'col s12'}}) }}
+
+            <div class="row">
+                <div class="input-field col s12">
+                    <div class="autocomplete" id="single">
+                        <div class="ac-input">
+                            {{ form_widget(form.callsignAutocomplete) }}
+                            {{ form_label(form.callsignAutocomplete) }}
+                        </div>
+                        <ul id="autocomplete_results" class="dropdown-content ac-dropdown"></ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-field col s12">
+                    {{ form_widget(form.band) }}
+                    {{ form_label(form.band) }}
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-field col s8">
+                    {{ form_widget(form.frequency) }}
+                    {{ form_label(form.frequency) }}
+                </div>
+                <div class="input-field col s4">
+                    {{ form_widget(form.frequencyUnit) }}
+                    {{ form_label(form.frequencyUnit) }}
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-field col s12">
+                    {{ form_widget(form.radioMode) }}
+                    {{ form_label(form.radioMode) }}
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-field col s12">
+                    {{ form_widget(form.rstSent) }}
+                    {{ form_label(form.rstSent) }}
+
+                    <ul class="input-list">
+                        <li><a href="#" class="btn waves-effect waves-light value-field-button blue darken-2">59</a></li>
+                        <li><a href="#" class="btn waves-effect waves-light value-field-button blue darken-2">599</a></li>
+                    </ul>
+                </div>
+
+                <div class="input-field col s12">
+                    {{ form_widget(form.rstReceived) }}
+                    {{ form_label(form.rstReceived) }}
+
+                    <ul class="input-list">
+                        <li><a href="#" class="btn waves-effect waves-light value-field-button blue darken-2">59</a></li>
+                        <li><a href="#" class="btn waves-effect waves-light value-field-button blue darken-2">599</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-field col s12">
+                    {{ form_widget(form.logStart) }}
+                    {{ form_label(form.logStart) }}
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-field col s12">
+                    {{ form_widget(form.logEnd) }}
+                    {{ form_label(form.logEnd) }}
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-field col s12">
+                    {{ form_widget(form.power) }}
+                    {{ form_label(form.power) }}
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-field col s12">
+                    {{ form_widget(form.comment) }}
+                    {{ form_label(form.comment) }}
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-field col s12">
+                    <button type="submit" class="waves-effect waves-light btn blue darken-2"><i class="material-icons left">add</i> Save logbook</button>
+                </div>
+            </div>
+            {#
+            <a class="modal-trigger waves-effect waves-light btn" href="#modal1">Modal</a>
+
+            <div id="modal1" class="modal modal-fixed-footer modal-fixed-header">
+                <div class="modal-header">
+                    <h4>Test</h4>
+                </div>
+                <div class="modal-content content-no-padding content-list">
+                    <ul>
+                        {% for i in 0..25 %}
+                        <li>
+                            <p>
+                                <input id="c{{ i }}" name="callsign" type="radio" value="W1AW" />
+                                <label for="c{{ i }}">W1AW</label>
+                            </p>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Agree</a>
+                </div>
+            </div>
+
+            #}
+            {{ form_end(form) }}
+        </div>
+{% endblock %}
+{% block javascripts %}
+
+    <script type="text/javascript">
+
+        function setVal(selector, val)
+        {
+            console.log(val);
+            $(selector).val(val);
+            $(selector).material_select();
+        }
+
+        $(function() {
+
+
+            $('select.auto-buttons').each(function() {
+
+                var self = $(this);
+                var parent = self.parent().parent().find('.input-field');
+
+                var elements = $(this).children().slice(1, 4);
+
+                if (typeof elements !== 'undefined' && elements.length > 0)
+                {
+                    $.each(elements, function() {
+                        if ($(this).val() < 1)
+                        {
+                            return;
+                        }
+
+                        parent.append('<input type="button" class="btn blue darken-2" onclick="setVal(\'select.auto-buttons\', '+$(this).val()+')" value="'+$(this).text()+'" data-id="'+$(this).val()+'" /> ');
+                    });
+                }
+            });
+
+            $('.modal').modal();
+
+            function openDateTimepicker(callback, current_time) {
+                var opts = {};
+
+                if (current_time.length > 0)
+                {
+                    opts.default = current_time;
+                }
+
+                var picker = new MaterialDatetimePicker(opts)
+                    .on('submit', function(val) {
+                        callback(val);
+
+                    })
+                    .on('open', function() { console.log(current_time); })
+                    .on('close', function() { console.log('Closed'); });
+
+                picker.open();
+            }
+
+            $('select:not(.autocomplete)').material_select();
+
+            var autocomplete = $('input.autocomplete').materialize_autocomplete({
+                limit: 20,
+                multiple: {
+                    enable: false,
+                    maxSize: 10
+                },
+                cacheable: false,
+                dropdown: {
+                    el: '#autocomplete_results'
+                },
+                getData: function (value, callback) {
+                    console.log(value);
+                    console.log(callback);
+
+                    $.ajax({
+                        url: '{{ url('qso_callsign_autocomplete') }}',
+                        method: 'POST',
+                        data: {
+                            autocomplete: value
+                        },
+                        success: function(result) {
+                            console.log(result);
+                            callback(value, result.data);
+                        }
+                    });
+                }
+            });
+
+            $('a.btn.value-field-button').on('click', function(evt) {
+                evt.preventDefault();
+                var input = $(this).parent().parent().parent().find('input');
+                input.focus();
+                input.val($(this).text());
+            });
+
+            $('.datepicker').click(function() {
+                var self = $(this);
+                openDateTimepicker(function(datetime) {
+                    self.val(datetime.format('YYYY-MM-DD hh:mm:ss'));
+                    self.focus();
+                }, self.val());
+            });
+        });
+    </script>
+{% endblock %}
+

@@ -1,0 +1,61 @@
+{% extends 'QSOBundle::default.html.twig' %}
+
+{% set title = 'Logbook - ' ~ logbook.id %}
+{% block content %}
+    <style>
+        table tr td:first-child {
+            font-weight: 600;
+            padding-left: 20px;
+        }
+    </style>
+    <table class="striped" style="margin-top: 50px;">
+        <tr>
+            <td>Communication start</td>
+            <td>{{ logbook.logStart|date }}</td>
+        </tr>
+        <tr>
+            <td>Communication end</td>
+            <td>{{ logbook.logEnd|date }}</td>
+        </tr>
+        </tr>
+        <tr>
+            <td>Radiomode</td>
+            <td>{{ logbook.mode }}</td>
+        </tr>
+        <tr>
+            <td>Band</td>
+            <td>{{ logbook.band }}</td>
+        </tr>
+        <tr>
+            <td>RST Sent</td>
+            <td>{{ logbook.rstSent }}</td>
+        </tr>
+        <tr>
+            <td>RST Received</td>
+            <td>{{ logbook.rstReceived }}</td>
+        </tr>
+        <tr>
+            <td>Frequency</td>
+            <td>{{ logbook.frequency }} {{ logbook.unit }}</td>
+        </tr>
+        <tr>
+            <td>Callsign</td>
+            <td>{{ logbook.callsign }}</td>
+        </tr>
+        <tr>
+            <td>My callsign</td>
+            <td>{{ app.user.callsign.callsign }}</td>
+        </tr>
+        <tr>
+            <td>Logbook created at</td>
+            <td>{{ logbook.createdAt|date }}</td>
+        </tr>
+        <tr>
+            <td>Comment</td>
+            <td>{% if logbook.comment|length > 0 %}{{ logbook.comment }}{% else %}N/A{% endif %}</td>
+        </tr>
+    </table>
+
+    <a href="{{ url('qso_logbook_delete', {id: logbook.id}) }}" class="btn red darken-4" style="margin: 40px 0px 0px 20px;">Delete</a>
+
+{% endblock %}

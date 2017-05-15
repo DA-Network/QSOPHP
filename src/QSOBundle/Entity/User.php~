@@ -1,0 +1,129 @@
+<?php
+
+namespace QSOBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
+
+/**
+ * User
+ *
+ * @ORM\Table(name="user")
+ * @ORM\Entity(repositoryClass="QSOBundle\Repository\UserRepository")
+ */
+class User 
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Callsign")
+     */
+    private $callsign;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Logbook", mappedBy="user")
+     */
+    private $logbooks;
+
+    /**
+     * @ORM\Column(type="string", length=25, unique=true)
+     */
+    private $username;
+
+    /**
+     * @ORM\Column(type="string", length=64)
+     */
+    private $password;
+
+    /**
+     * @ORM\Column(type="string", length=60, unique=true)
+     */
+    private $email;
+
+    /**
+     * @ORM\Column(name="is_active", type="boolean")
+     */
+    private $isActive;
+
+    /**
+     * Get id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set callsign
+     *
+     * @param \QSOBundle\Entity\Callsign $callsign
+     *
+     * @return User
+     */
+    public function setCallsign(\QSOBundle\Entity\Callsign $callsign = null)
+    {
+        $this->callsign = $callsign;
+
+        return $this;
+    }
+
+    /**
+     * Get callsign
+     *
+     * @return \QSOBundle\Entity\Callsign
+     */
+    public function getCallsign()
+    {
+        return $this->callsign;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->logbooks = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add logbook
+     *
+     * @param \QSOBundle\Entity\Logbook $logbook
+     *
+     * @return User
+     */
+    public function addLogbook(\QSOBundle\Entity\Logbook $logbook)
+    {
+        $this->logbooks[] = $logbook;
+
+        return $this;
+    }
+
+    /**
+     * Remove logbook
+     *
+     * @param \QSOBundle\Entity\Logbook $logbook
+     */
+    public function removeLogbook(\QSOBundle\Entity\Logbook $logbook)
+    {
+        $this->logbooks->removeElement($logbook);
+    }
+
+    /**
+     * Get logbooks
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getLogbooks()
+    {
+        return $this->logbooks;
+    }
+}
