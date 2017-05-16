@@ -55,7 +55,12 @@
             <td>{% if logbook.comment|length > 0 %}{{ logbook.comment }}{% else %}N/A{% endif %}</td>
         </tr>
     </table>
-
-    <a href="{{ url('qso_logbook_delete', {id: logbook.id}) }}" class="btn red darken-4" style="margin: 40px 0px 0px 20px;">Delete</a>
-
+    <div class="row">
+    <div class="col sm6">
+    <a href="{{ url('qso_logbook_delete', {id: logbook.id}) }}" class="btn red darken-3 fullWidth">Delete</a>
+    </div>
+    <div class="col sm6">
+    <a href="{{ url('qso_logbook_edit', {id: logbook.id}) }}" class="btn blue darken-3 fullWidth">Modify</a>
+    </div></div>
+    <div class="push-50"</div>
 {% endblock %}
