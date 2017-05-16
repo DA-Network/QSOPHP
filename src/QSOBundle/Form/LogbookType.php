@@ -31,13 +31,13 @@ class LogbookType extends AbstractType
             ->add('logStart', DateTimeType::class, array(
                 'widget' => 'single_text',
                 'attr' => array(
-                    'class' => 'datepicker'
+                    'class' => 'datepicker_any'
                 )
             ))
             ->add('logEnd', DateTimeType::class, array(
                 'widget' => 'single_text',
                 'attr' => array(
-                    'class' => 'datepicker'
+                    'class' => 'datepicker_any'
                 )
             ))
             ->add('callsignAutocomplete', TextType::class, array(

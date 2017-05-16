@@ -146,8 +146,15 @@
             #}
         </div>
 {% endblock %}
+
+{%block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('assets/vendor/anypicker/anypicker-font.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/vendor/anypicker/anypicker-all.css') }}" />
+{% endblock %}
+
 {% block javascripts %}
 
+    <script src="{{ asset('assets/vendor/anypicker/anypicker.js') }}"></script>
 
     <script type="text/javascript">
 
@@ -159,6 +166,16 @@
         }
 
         $(function() {
+
+            // AnyPicker 
+            $(".datepicker_any").AnyPicker({
+                mode: "datetime",
+                showComponentLabel: true,
+                inputDateTimeFormat: "yyyy-MM-dd HH:mm:ss",
+                dateTimeFormat: "yyyy-MM-dd HH:mm:ss",
+            });
+
+
 
 
             $('select.auto-buttons').each(function() {
