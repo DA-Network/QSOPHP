@@ -20,21 +20,22 @@ class UserType extends AbstractType
     {
         $builder
             ->add('firstname', null, array(
-                'label' => 'Firstname'
+                'label' => 'First Name'
             ))
             ->add('lastname', null, array(
-                'label' => 'Lastname'
+                'label' => 'Last Name'
             ))
             ->add('email', null, array(
                 'label' => 'E-mail Address'
             ))
+            /*
             ->add('noCallsign', CheckboxType::class, array(
                 'mapped' => false,
                 'label' => 'I don\'t have a Callsign',
                 'attr' => array(
                     'class' => 'no-callsign-check'
                 )
-            ))
+            )) */
             ->add('callsignName', TextType::class, array(
                 'label' => 'Call Sign'
             ))

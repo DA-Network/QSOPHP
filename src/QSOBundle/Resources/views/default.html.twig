@@ -60,10 +60,12 @@
             <li><a class="nav-url" href="{{ url('qso_dashboard') }}"><i class="material-icons">home</i>Dashboard</a></li>
             <li><a class="nav-url" href="{{ url('qso_logbook_add') }}"><i class="material-icons">add</i>Logbook</a></li>
             <li><a class="nav-url" href="{{ url('qso_logbook_overview') }}"><i class="material-icons">list</i>Logbook entries</a></li>
+            <li><a class="waves-effect" href="{{ url('logout') }}"><i class="material-icons">rowing</i>Logout</a></li>
             <li><div class="divider"></div></li>
-            <li><a class="subheader">Extra's</a></li>
-            <li><a class="waves-effect" href="#!">Digitaladdiction</a></li>
-            <li><a class="waves-effect" href="{{ url('logout') }}">Logout</a></li>
+            <li><a class="subheader">Resources</a></li>
+            <li><a class="waves-effect" href="https://www.digitaladdiction.info/qsofaq" target="_blank"><i class="material-icons">help</i>Help / FAQ</a></li>
+            <li><a class="external-link" hrefx`="https://www.digitaladdiction.info/" target="_blank"><i class="material-icons">home</i>DigitalAddiction Home</a></li>
+            <li><a class="subheader" >DigitalAddictionLabs &copy; 2017 | v.0.0.1d</a></li>
         </ul>
 
         {% block content %}
