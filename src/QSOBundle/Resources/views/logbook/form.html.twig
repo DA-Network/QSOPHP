@@ -115,7 +115,7 @@
             </div>
             <div class="row">
             <div class="input-field col s12">
-                    <button class="waves-effect waves-light btn red darken-2 fullWidth" onclick="window.location.href = window.location.href"><i class="material-icons left">cancel</i> Reset Form</button>
+                    <button class="waves-effect waves-light btn red darken-2 fullWidth clear-form"><i class="material-icons left">cancel</i> Reset Form</button>
                 </div>
             <div class="push-100">&nbsp;</div>
             </div>
@@ -167,6 +167,13 @@
 
         $(function() {
 
+            $('button.clear-form').on('click', function(e) {
+                e.preventDefault();
+                $('body').find('form input:not(.no-clear)').each(function() {
+                    $(this).val('');
+                });
+            });
+
             // AnyPicker 
             $(".datepicker_any").AnyPicker({
                 mode: "datetime",
@@ -193,7 +200,7 @@
                             return;
                         }
 
-                        parent.append('<input type="button" class="btn blue darken-2" onclick="setVal(\'select.auto-buttons\', '+$(this).val()+')" value="'+$(this).text()+'" data-id="'+$(this).val()+'" /> ');
+                        parent.append('<input type="button" class="btn blue darken-2 no-clear" onclick="setVal(\'select.auto-buttons\', '+$(this).val()+')" value="'+$(this).text()+'" data-id="'+$(this).val()+'" /> ');
                     });
                 }
             });

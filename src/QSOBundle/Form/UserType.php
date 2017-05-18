@@ -28,14 +28,14 @@ class UserType extends AbstractType
             ->add('email', null, array(
                 'label' => 'E-mail Address'
             ))
-            /*
             ->add('noCallsign', CheckboxType::class, array(
                 'mapped' => false,
+                'required' => false,
                 'label' => 'I don\'t have a Callsign',
                 'attr' => array(
                     'class' => 'no-callsign-check'
                 )
-            )) */
+            ))
             ->add('callsignName', TextType::class, array(
                 'label' => 'Call Sign'
             ))
